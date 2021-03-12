@@ -1,0 +1,12 @@
+---
+- name: Download Notepad++
+  ansible.windows.win_get_url:
+    url: "{{ download_url }}"
+    dest: "{{ ansible_env.TEMP }}\\{{ file_name }}"
+
+- name: Install np++
+  ansible.windows.win_package:
+    path: "{{ ansible_env.TEMP }}\\{{ file_name }}"
+    arguments: "/S"
+    creates_path: 'C:\Program Files\Notepad++\notepad++.exe'
+    state: present
